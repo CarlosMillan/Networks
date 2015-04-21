@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Controllers\CIntegrantes.cs" />
+    <Compile Include="App_Code\Extensions.cs" />
     <Compile Include="App_Code\Models\MCoordinador.cs" />
     <Compile Include="App_Code\Models\MDistrito.cs" />
     <Compile Include="App_Code\Models\MIntegrante.cs" />

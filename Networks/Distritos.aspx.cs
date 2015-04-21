@@ -12,10 +12,12 @@ namespace Networks
     public partial class Distritos : System.Web.UI.Page
     {
         private CDistritos C;
+        public bool? Saved;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             C = new CDistritos();
+            Saved = null;
 
             if (!IsPostBack)            
                 ReloadDistricts();            
@@ -28,7 +30,7 @@ namespace Networks
                 if (!String.IsNullOrEmpty(TxtName.Text))
                 {
                     MDistrito New = new MDistrito(TxtName.Text);
-                    C.SaveDistrict(New);
+                    Saved = C.SaveDistrict(New);
                     ResetGUI();
                 }
             }catch{}

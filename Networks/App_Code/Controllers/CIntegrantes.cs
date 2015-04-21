@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace Networks.Controllers
@@ -12,7 +13,7 @@ namespace Networks.Controllers
     public class CIntegrantes
     {
         public enum TypeIntegrante {Coordinador, Territorial, Lider, Promovido}
-        private TypeIntegrante _type;
+        private TypeIntegrante _type;        
 
         public CIntegrantes(TypeIntegrante t) 
         {
@@ -152,81 +153,156 @@ namespace Networks.Controllers
         #endregion
 
         #region Save
-        public void SaveCoordinador(MCoordinador coor)
+        public bool SaveCoordinador(MCoordinador coor)
         {
+            bool Saved = false;
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DB.Insert(_type.ToString(), new object[] { "null"
-                                                          , String.Concat("'", coor.Paterno.ToUpper(), "'") 
-                                                          , String.Concat("'", coor.Materno.ToUpper(), "'") 
-                                                          , String.Concat("'", coor.Nombres.ToUpper(), "'")
-                                                          , coor.Seccion
-                                                          , 
-                                                          });
+                StringBuilder WhereStatement = new StringBuilder();
+                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                                              and ApellidoMaterno like {1}
+                                              and Nombres like {2}"
+                                            , Extensions.SParam(coor.Paterno)
+                                            , Extensions.SParam(coor.Materno)
+                                            , Extensions.SParam(coor.Nombres));
+                object ID =  DB.GetValue("Coordinador", "ID", WhereStatement.ToString());
+
+                if (ID == null)
+                {
+                    DB.Insert(_type.ToString(), new object[] { "ID", "null"
+                                                              , IntegrantsColumns.Paterno, Extensions.SParam(coor.Paterno)
+                                                              , IntegrantsColumns.Materno, Extensions.SParam(coor.Materno)
+                                                              , IntegrantsColumns.Nombres, Extensions.SParam(coor.Nombres)
+                                                              , IntegrantsColumns.Seccion, coor.Seccion                                                             
+                                                              });
+                    Saved = true;
+                }
             }
             catch (Exception E)
             {
                 throw E;
             }
+
+            return Saved;
         }
 
-        public void SaveTerritorial(MTerritorial terr)
+        public bool SaveTerritorial(MTerritorial terr)
         {
+            bool Saved = false;
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DB.Insert("Territorial", new object[] { "null"
-                                                          , terr.CoordinadorId
-                                                          , String.Concat("'", terr.Paterno.ToUpper(), "'") 
-                                                          , String.Concat("'", terr.Materno.ToUpper(), "'") 
-                                                          , String.Concat("'", terr.Nombres.ToUpper(), "'")
-                                                          , terr.Seccion
+                StringBuilder WhereStatement = new StringBuilder();
+                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                                              and ApellidoMaterno like {1}
+                                              and Nombres like {2}"
+                                            , Extensions.SParam(terr.Paterno)
+                                            , Extensions.SParam(terr.Materno)
+                                            , Extensions.SParam(terr.Nombres));
+                object ID = DB.GetValue("Territorial", "ID", WhereStatement.ToString());
+
+                if (ID == null)
+                {
+                    DB.Insert("Territorial", new object[] { "ID", "null"
+                                                          ,  IntegrantsColumns.Coordinador, terr.CoordinadorId
+                                                           , IntegrantsColumns.Paterno, Extensions.SParam(terr.Paterno)
+                                                           , IntegrantsColumns.Materno, Extensions.SParam(terr.Materno)
+                                                           , IntegrantsColumns.Nombres, Extensions.SParam(terr.Nombres)
+                                                           , IntegrantsColumns.Seccion, terr.Seccion
                                                           });
+                    Saved = true;
+                }
             }
             catch (Exception E)
             {
                 throw E;
             }
+
+            return Saved;
         }
 
-        public void SaveLider(MLider terr)
+        public bool SaveLider(MLider lid)
         {
+            bool Saved = false; 
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DB.Insert("Lider", new object[] { "null"
-                                                          , terr.Territorial
-                                                          , String.Concat("'", terr.Paterno.ToUpper(), "'") 
-                                                          , String.Concat("'", terr.Materno.ToUpper(), "'") 
-                                                          , String.Concat("'", terr.Nombres.ToUpper(), "'")
-                                                          , terr.Seccion
-                                                          });
+                StringBuilder WhereStatement = new StringBuilder();
+                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                                              and ApellidoMaterno like {1}
+                                              and Nombres like {2}"
+                                            , Extensions.SParam(lid.Paterno)
+                                            , Extensions.SParam(lid.Materno)
+                                            , Extensions.SParam(lid.Nombres));
+                object ID = DB.GetValue("Lider", "ID", WhereStatement.ToString());
+
+                if (ID == null)
+                {
+                    DB.Insert("Lider", new object[] { "ID" ,"null"
+                                                     , IntegrantsColumns.Territorial, lid.Territorial
+                                                     , IntegrantsColumns.Paterno, Extensions.SParam(lid.Paterno)
+                                                     , IntegrantsColumns.Materno, Extensions.SParam(lid.Materno)
+                                                     , IntegrantsColumns.Nombres, Extensions.SParam(lid.Nombres)
+                                                     , IntegrantsColumns.Seccion, lid.Seccion
+                                                     });
+                    Saved = true;
+                }
             }
             catch (Exception E)
             {
                 throw E;
             }
+
+            return Saved;
         }
 
-        public void SavePromovido(MPromovido prom)
+        public bool SavePromovido(MPromovido prom)
         {
+            bool Saved = false;
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DB.Insert("Promovido", new object[] { "null"
-                                                          , prom.LiderId
-                                                          , String.Concat("'", prom.Paterno.ToUpper(), "'") 
-                                                          , String.Concat("'", prom.Materno.ToUpper(), "'") 
-                                                          , String.Concat("'", prom.Nombres.ToUpper(), "'")
-                                                          , prom.Seccion
+                StringBuilder WhereStatement = new StringBuilder();
+                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                                              and ApellidoMaterno like {1}
+                                              and Nombres like {2}"
+                                            , Extensions.SParam(prom.Paterno)
+                                            , Extensions.SParam(prom.Materno)
+                                            , Extensions.SParam(prom.Nombres));
+                object ID = DB.GetValue("Promovido", "ID", WhereStatement.ToString());
+
+                if (ID == null)
+                {
+                    DB.Insert("Promovido", new object[] { "ID", "null"
+                                                          ,IntegrantsColumns.Lider,  prom.LiderId
+                                                          ,IntegrantsColumns.Paterno, Extensions.SParam(prom.Paterno)
+                                                          ,IntegrantsColumns.Materno, Extensions.SParam(prom.Materno)
+                                                          ,IntegrantsColumns.Nombres, Extensions.SParam(prom.Nombres)
+                                                          ,IntegrantsColumns.Seccion, prom.Seccion
                                                           });
+
+                    Saved = true;
+                }
             }
             catch (Exception E)
             {
                 throw E;
             }
+
+            return Saved;
         }
         #endregion
+    }
+
+    public static class IntegrantsColumns
+    {
+        public static string Paterno = "ApellidoPaterno";
+        public static string Materno = "ApellidoMaterno";
+        public static string Nombres = "Nombres";
+        public static string Seccion = "SeccionId";
+        public static string Lider = "LiderId";
+        public static string Territorial = "TerritorialId";
+        public static string Coordinador = "CoordinadorID";
     }
 }

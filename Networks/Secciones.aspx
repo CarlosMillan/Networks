@@ -27,13 +27,11 @@
        <tr>
            <td colspan="2" style="text-align:right;" class="space"><asp:Button class="green" runat="server" ID="BtnSave" Text="Guardar" OnClick="BtnSave_Click" /></td>
        </tr>
-       <%if(C.FailSave) 
-         {%>
+       <%if(Saved == false)
+         { %>
        <tr>
-           <td colspan="2" style="color:red;">
-               Parece que ya existe el registro
-           </td>
-       </tr>
+           <td colspan="2" style="color:red">No se guardo la sección seguramente ya existe.</td>
+       </tr>   
        <%} %>
    </table>
 </asp:Content>

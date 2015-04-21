@@ -13,11 +13,13 @@ namespace Networks
     {
         private CIntegrantes C;
         private CDistritos CD;
+        public bool? Saved;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             C = new CIntegrantes(CIntegrantes.TypeIntegrante.Lider);
             CD = new CDistritos();
+            Saved = null;
 
             if (!IsPostBack)
             {
@@ -52,7 +54,7 @@ namespace Networks
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             MLider NewLider = new MLider(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value), Int32.Parse(DpTerr.SelectedItem.Value));
-            C.SaveLider(NewLider);
+            Saved = C.SaveLider(NewLider);
             ReloadIntegrantsTable();
             ReloadTerritorial();
             Clear();

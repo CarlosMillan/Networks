@@ -13,11 +13,13 @@ namespace Networks
     {
         private CIntegrantes C;
         private CDistritos CD;
+        public bool? Saved;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             C = new CIntegrantes(CIntegrantes.TypeIntegrante.Promovido);
             CD = new CDistritos();
+            Saved = null;
 
             if (!IsPostBack)
             {
@@ -52,7 +54,7 @@ namespace Networks
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             MPromovido NewProm = new MPromovido(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value), Int32.Parse(DpLid.SelectedItem.Value));
-            C.SavePromovido(NewProm);
+            Saved = C.SavePromovido(NewProm);
             ReloadIntegrantsTable();
             ReloadLider();
             Clear();

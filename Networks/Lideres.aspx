@@ -7,13 +7,6 @@
            <td colspan="2" class="title space">Agregar Líder</td>
        </tr>
        <tr>
-           <td colspan="2">
-                <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="DgridLid" AlternatingItemStyle-BackColor="#FAEBD7">
-                    <HeaderStyle BackColor="#B40431" Font-Bold="true" ForeColor="White" />                   
-                </asp:DataGrid>
-           </td>
-       </tr>
-       <tr>
            <td class="space">Sección:</td>
            <td>
                <asp:DropDownList runat="server" ID="DpSeccion"></asp:DropDownList>
@@ -39,6 +32,19 @@
        </tr>
        <tr>
            <td colspan="2" style="text-align:right;" class="space"><asp:Button class="green" runat="server" ID="BtnSave" Text="Guardar" OnClick="BtnSave_Click" /></td>
+       </tr>
+     <%if(Saved == false)
+         { %>
+       <tr>
+           <td colspan="2" style="color:red">No se guardo el líder seguramente ya existe.</td>
+       </tr>   
+       <%} %>
+       <tr>
+           <td colspan="2">
+                <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="DgridLid" AlternatingItemStyle-BackColor="#FAEBD7">
+                    <HeaderStyle BackColor="#B40431" Font-Bold="true" ForeColor="White" />                   
+                </asp:DataGrid>
+           </td>
        </tr>
    </table>
 </asp:Content>

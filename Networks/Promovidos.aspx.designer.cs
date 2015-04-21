@@ -13,15 +13,6 @@ namespace Networks {
     public partial class Promovidos {
         
         /// <summary>
-        /// DgridProm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataGrid DgridProm;
-        
-        /// <summary>
         /// DpSeccion control.
         /// </summary>
         /// <remarks>
@@ -74,5 +65,14 @@ namespace Networks {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnSave;
+        
+        /// <summary>
+        /// DgridProm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataGrid DgridProm;
     }
 }

@@ -6,6 +6,7 @@ using SQLiteDBManger;
 using Networks.Models;
 using System.Configuration;
 using System.Data;
+using System.Text;
 
 namespace Networks.Controllers
 {
@@ -41,7 +42,7 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable DistrictsTable = DB.GetTable("V_Distrito_Seccion", new object[] {"Distrito", "ID", "Nombre"});
+                DataTable DistrictsTable = DB.GetTable("V_Seccion_Distrito", new object[] { "Distrito", "ID", "Nombre" });
 
                 foreach (DataRow Row in DistrictsTable.Rows)
                 {
@@ -58,29 +59,55 @@ namespace Networks.Controllers
             return Result;
         }        
 
-        public void SaveDistrict(MDistrito district)
+        public bool SaveDistrict(MDistrito district)
         {
+            bool Saved = false;
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DB.Insert("Distrito", new object[] { "null", String.Concat("'", district.Nombre, "'")});
+                StringBuilder WhereStatement = new StringBuilder();
+                WhereStatement.AppendFormat("Nombre like {0}", Extensions.SParam(district.Nombre));
+                object ID =  DB.GetValue("Distrito", "ID", WhereStatement.ToString());
+
+                if (ID == null)
+                {
+                    DB.Insert("Distrito", new object[] { "ID", "null"
+                                                        ,"Nombre", Extensions.SParam(district.Nombre)});
+
+                    Saved = true;
+                }
             }catch(Exception E)
             {
-                throw E;
+                throw E;                
             }
+
+            return Saved;
         }
 
-        public void SaveSection(MSeccion section)
+        public bool SaveSection(MSeccion section)
         {
+            bool Saved = false;
             try
-            {
+            {                
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DB.Insert("Seccion", new object[] { "null", String.Concat("'", section.Nombre, "'"), section.District.Id });
+                StringBuilder WhereStatement = new StringBuilder();
+                WhereStatement.AppendFormat("DistritoId = {0} and Nombre like {1}", section.District.Id, Extensions.SParam(section.Nombre));
+                object ID =  DB.GetValue("Seccion", "ID", WhereStatement.ToString());
+
+                if (ID == null)
+                {
+                    DB.Insert("Seccion", new object[] { "ID", "null"
+                                                      , "Nombre", Extensions.SParam(section.Nombre)
+                                                      , "DistritoId" , section.District.Id });
+                    Saved = true;
+                }
             }
             catch (Exception E)
             {
                 throw E;
             }
+
+            return Saved;
         }
     }
 }

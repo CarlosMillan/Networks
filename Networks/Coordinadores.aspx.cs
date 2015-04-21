@@ -13,6 +13,7 @@ namespace Networks
     {
         private CIntegrantes C;
         private CDistritos CD;
+        public bool? Saved;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,7 +44,7 @@ namespace Networks
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             MCoordinador NewIntegrant = new MCoordinador(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value));
-            C.SaveCoordinador(NewIntegrant);
+            Saved = C.SaveCoordinador(NewIntegrant);
             ReloadIntegrants();
             Clear();
         }

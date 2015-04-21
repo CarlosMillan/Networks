@@ -11,11 +11,13 @@ namespace Networks
 {
     public partial class Secciones : System.Web.UI.Page
     {
-        public CDistritos C;
+        private CDistritos C;
+        public bool? Saved;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             C = new CDistritos();
+            Saved = null;
 
             if (!IsPostBack)
             {
@@ -30,7 +32,7 @@ namespace Networks
             {
                 MDistrito SelectedDistrict = new MDistrito(Int32.Parse(DpDistritos.SelectedItem.Value), DpDistritos.SelectedItem.Text);
                 MSeccion NewSeccion = new MSeccion(SelectedDistrict, TxtName.Text);
-                C.SaveSection(NewSeccion);                
+                Saved = C.SaveSection(NewSeccion);
                 ReloadSections();
                 TxtName.Text = string.Empty;
             }

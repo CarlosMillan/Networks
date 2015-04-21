@@ -13,11 +13,13 @@ namespace Networks
     {
         private CIntegrantes C;
         private CDistritos CD;
+        public bool? Saved;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             C = new CIntegrantes(CIntegrantes.TypeIntegrante.Territorial);
             CD = new CDistritos();
+            Saved = null;
 
             if (!IsPostBack)
             {
@@ -52,7 +54,7 @@ namespace Networks
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             MTerritorial NewTerritorial = new MTerritorial(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value), Int32.Parse(DpCoor.SelectedItem.Value));
-            C.SaveTerritorial(NewTerritorial);
+            Saved = C.SaveTerritorial(NewTerritorial);
             ReloadIntegrantsTable();
             Clear();
         }

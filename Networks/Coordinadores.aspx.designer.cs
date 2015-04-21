@@ -13,15 +13,6 @@ namespace Networks {
     public partial class Coordinadores {
         
         /// <summary>
-        /// DgridCoor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataGrid DgridCoor;
-        
-        /// <summary>
         /// DpSeccion control.
         /// </summary>
         /// <remarks>
@@ -65,5 +56,14 @@ namespace Networks {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnSave;
+        
+        /// <summary>
+        /// DgridCoor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataGrid DgridCoor;
     }
 }
