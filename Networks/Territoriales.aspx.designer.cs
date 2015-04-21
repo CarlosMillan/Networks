@@ -10,34 +10,61 @@
 namespace Networks {
     
     
-    public partial class Secciones {
+    public partial class Territoriales {
         
         /// <summary>
-        /// DgridSecciones control.
+        /// DgridTerr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataGrid DgridSecciones;
+        protected global::System.Web.UI.WebControls.DataGrid DgridTerr;
         
         /// <summary>
-        /// DpDistritos control.
+        /// DpSeccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DpDistritos;
+        protected global::System.Web.UI.WebControls.DropDownList DpSeccion;
         
         /// <summary>
-        /// TxtName control.
+        /// DpCoor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtName;
+        protected global::System.Web.UI.WebControls.DropDownList DpCoor;
+        
+        /// <summary>
+        /// TxtLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtLastName;
+        
+        /// <summary>
+        /// TxtMiddleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtMiddleName;
+        
+        /// <summary>
+        /// TxtNames control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtNames;
         
         /// <summary>
         /// BtnSave control.

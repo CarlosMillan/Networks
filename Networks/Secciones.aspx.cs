@@ -1,4 +1,5 @@
 ﻿using Networks.Controllers;
+using Networks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +16,37 @@ namespace Networks
         protected void Page_Load(object sender, EventArgs e)
         {
             C = new CDistritos();
-            
+
             if (!IsPostBack)
+            {
+                ReloadSections();
                 ReloadDistricts();
+            }
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-
+            if (String.IsNullOrEmpty(TxtName.Text))
+            {
+                MDistrito SelectedDistrict = new MDistrito(Int32.Parse(DpDistritos.SelectedItem.Value), DpDistritos.SelectedItem.Text);
+                MSeccion NewSeccion = new MSeccion(SelectedDistrict, TxtName.Text);
+                C.SaveSection(NewSeccion);
+                ReloadSections();
+                TxtName.Text = string.Empty;
+            }
         }
 
         private void ReloadDistricts()
         {
             DpDistritos.DataSource = C.GetDistricts();
-            DpDistritos.DataTextField = "Name";
+            DpDistritos.DataTextField = "Nombre";
             DpDistritos.DataValueField = "Id";
+            this.DataBind();            
+        }
+
+        private void ReloadSections()
+        {
+            DgridSecciones.DataSource = C.GetSections();
             this.DataBind();
         }
     }

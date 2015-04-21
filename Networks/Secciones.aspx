@@ -8,6 +8,11 @@
            <td colspan="2" class="title space">Agregar Sección</td>           
        </tr>
        <tr>
+           <td colspan="2">
+                <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="DgridSecciones"></asp:DataGrid>
+           </td>
+       </tr>
+       <tr>
            <td class="space">Distrito</td>
            <td>
                <asp:DropDownList runat="server" ID="DpDistritos"></asp:DropDownList>

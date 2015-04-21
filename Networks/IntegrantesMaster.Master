@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="IntegrantesMaster.master.cs" Inherits="Networks.IntegrantesMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="http://localhost:61051/Css/General.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <nav>
+        <a href="Default.aspx">Inicio</a> |
+        <a href="Coordinadores.aspx">Coordinadores</a> |
+        <a href="Territoriales.aspx">Territoriales</a> |
+        <a href="Lideres.aspx">Lideres</a> |
+        <a href="Promovidos.aspx">Promovidos</a>
+    </nav>
+        <br />
+    <div class="flexcontainer">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

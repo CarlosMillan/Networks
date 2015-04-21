@@ -11,7 +11,7 @@ namespace Networks.Models
         private int _id;
 
         public int Id { get { return _id; } }
-        public string Name { get { return _name; } }       
+        public string Nombre { get { return _name; } }       
 
         public MDistrito(int id, string name)
         {

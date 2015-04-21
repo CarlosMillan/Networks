@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Networks
 {
-    public partial class Integrantes : System.Web.UI.Page
+    public partial class IntegrantesMaster : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
+        }       
     }
 }

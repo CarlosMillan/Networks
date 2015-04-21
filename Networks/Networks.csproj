@@ -14,7 +14,7 @@
     <RootNamespace>Networks</RootNamespace>
     <AssemblyName>Networks</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -58,17 +58,33 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Coordinadores.aspx" />
     <Content Include="Css\General.css" />
     <Content Include="Default.aspx" />
     <Content Include="Distritos.aspx" />
-    <Content Include="Integrantes.aspx" />
+    <Content Include="Lideres.aspx" />
+    <Content Include="Promovidos.aspx" />
     <Content Include="Secciones.aspx" />
+    <Content Include="Territoriales.aspx" />
     <Content Include="Tipo.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Controllers\CIntegrantes.cs" />
+    <Compile Include="App_Code\Models\MCoordinador.cs" />
     <Compile Include="App_Code\Models\MDistrito.cs" />
+    <Compile Include="App_Code\Models\MIntegrante.cs" />
+    <Compile Include="App_Code\Models\MLider.cs" />
+    <Compile Include="App_Code\Models\MPromovido.cs" />
     <Compile Include="App_Code\Models\MSeccion.cs" />
+    <Compile Include="App_Code\Models\MTerritorial.cs" />
+    <Compile Include="Coordinadores.aspx.cs">
+      <DependentUpon>Coordinadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Coordinadores.aspx.designer.cs">
+      <DependentUpon>Coordinadores.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DistrictsMaster.Master.cs">
       <DependentUpon>DistrictsMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -83,12 +99,26 @@
     <Compile Include="Distritos.aspx.designer.cs">
       <DependentUpon>Distritos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Integrantes.aspx.cs">
-      <DependentUpon>Integrantes.aspx</DependentUpon>
+    <Compile Include="IntegrantesMaster.Master.cs">
+      <DependentUpon>IntegrantesMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Integrantes.aspx.designer.cs">
-      <DependentUpon>Integrantes.aspx</DependentUpon>
+    <Compile Include="IntegrantesMaster.Master.designer.cs">
+      <DependentUpon>IntegrantesMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Lideres.aspx.cs">
+      <DependentUpon>Lideres.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Lideres.aspx.designer.cs">
+      <DependentUpon>Lideres.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Promovidos.aspx.cs">
+      <DependentUpon>Promovidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Promovidos.aspx.designer.cs">
+      <DependentUpon>Promovidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Secciones.aspx.cs">
       <DependentUpon>Secciones.aspx</DependentUpon>
@@ -96,6 +126,13 @@
     </Compile>
     <Compile Include="Secciones.aspx.designer.cs">
       <DependentUpon>Secciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Territoriales.aspx.cs">
+      <DependentUpon>Territoriales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Territoriales.aspx.designer.cs">
+      <DependentUpon>Territoriales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tipo.aspx.cs">
       <DependentUpon>Tipo.aspx</DependentUpon>
@@ -117,6 +154,7 @@
   <ItemGroup>
     <Content Include="DistrictsMaster.Master" />
     <Content Include="App_Code\DataBase\NetworksDatabase" />
+    <Content Include="IntegrantesMaster.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -145,12 +183,12 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61051</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58593/</IISUrl>
+          <IISUrl>http://localhost/Networks</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost/Redes</IISAppRootUrl>
+          <IISAppRootUrl>http://localhost:82/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>http://localhost/Redes</CustomServerUrl>
+          <CustomServerUrl>http://localhost/Networks</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

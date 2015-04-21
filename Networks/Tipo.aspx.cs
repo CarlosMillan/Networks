@@ -17,7 +17,7 @@ namespace Networks
 
         protected void BtnIntegrants_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Integrantes.aspx");
+            Response.Redirect("Promovidos.aspx");
         }
 
         protected void BtnDistricts_Click(object sender, EventArgs e)
