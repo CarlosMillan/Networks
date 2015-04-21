@@ -31,7 +31,12 @@ namespace Networks
 
         private void ReloadIntegrantsTable()
         {
-            DgridTerr.DataSource = C.GetTerrotoriales();
+            ReloadIntegrantsTable(C.GetTerrotoriales());
+        }
+
+        private void ReloadIntegrantsTable(List<MTerritorial> filtered)
+        {
+            DgridTerr.DataSource = filtered;
             this.DataBind();
         }
 
@@ -63,6 +68,31 @@ namespace Networks
             TxtLastName.Text = string.Empty;
             TxtMiddleName.Text = string.Empty;
             TxtNames.Text = string.Empty;
+        }
+
+        protected void BtnSearch_Click(object sender, EventArgs e)
+        {
+            List<object> CriteriosList = new List<object>();
+
+            if (!String.IsNullOrEmpty(TxtLastName.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.Paterno);
+                CriteriosList.Add(Extensions.SParam(TxtLastName.Text));                
+            }
+
+            if (!String.IsNullOrEmpty(TxtMiddleName.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.Materno);
+                CriteriosList.Add(Extensions.SParam(TxtMiddleName.Text));
+            }
+
+            if (!String.IsNullOrEmpty(TxtNames.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.Nombres);
+                CriteriosList.Add(Extensions.SParam(TxtNames.Text));
+            }
+
+            ReloadIntegrantsTable(C.SearchTerritorial(CriteriosList.ToArray()));
         }
     }
 }

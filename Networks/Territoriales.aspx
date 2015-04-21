@@ -31,7 +31,8 @@
            <td><asp:TextBox runat="server" ID="TxtNames" Width="400"></asp:TextBox></td>
        </tr>
        <tr>
-           <td colspan="2" style="text-align:right;" class="space"><asp:Button class="green" runat="server" ID="BtnSave" Text="Guardar" OnClick="BtnSave_Click" /></td>
+           <td class="space"><asp:Button class="green" runat="server" ID="BtnSearch" Text="Buscar" OnClick="BtnSearch_Click" /></td>
+           <td style="text-align:right;" class="space"><asp:Button class="green" runat="server" ID="BtnSave" Text="Guardar" OnClick="BtnSave_Click" /></td>
        </tr>
      <%if(Saved == false)
          { %>

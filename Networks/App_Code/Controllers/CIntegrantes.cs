@@ -28,14 +28,14 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable DistrictsTable = DB.GetTable("Coordinador", new object[] { "ID", 
+                DataTable Table = DB.GetTable("Coordinador", new object[] { "ID", 
                                                                                      "ApellidoPaterno", 
                                                                                      "ApellidoMaterno", 
                                                                                      "Nombres",
                                                                                      "SeccionId"
                                                                                     });
 
-                foreach (DataRow Row in DistrictsTable.Rows)
+                foreach (DataRow Row in Table.Rows)
                     Result.Add(new MCoordinador(Int32.Parse(Row["ID"].ToString())
                                                 , Row["ApellidoPaterno"].ToString()
                                                 , Row["ApellidoMaterno"].ToString()
@@ -59,15 +59,15 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable DistrictsTable = DB.GetTable("Territorial", new object[] { "ID", 
-                                                                                     "ApellidoPaterno", 
-                                                                                     "ApellidoMaterno", 
-                                                                                     "Nombres",
-                                                                                     "SeccionId",
-                                                                                     "CoordinadorId"
+                DataTable Table = DB.GetTable("Territorial", new object[] { IntegrantsColumns.Id, 
+                                                                                     IntegrantsColumns.Paterno, 
+                                                                                     IntegrantsColumns.Materno, 
+                                                                                     IntegrantsColumns.Nombres,
+                                                                                     IntegrantsColumns.Seccion,
+                                                                                     IntegrantsColumns.Coordinador
                                                                                     });
 
-                foreach (DataRow Row in DistrictsTable.Rows)
+                foreach (DataRow Row in Table.Rows)
                     Result.Add(new MTerritorial(Int32.Parse(Row["ID"].ToString())
                                                 , Row["ApellidoPaterno"].ToString()
                                                 , Row["ApellidoMaterno"].ToString()
@@ -92,7 +92,7 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable DistrictsTable = DB.GetTable("Lider", new object[] { "ID", 
+                DataTable Table = DB.GetTable("Lider", new object[] { "ID", 
                                                                                      "ApellidoPaterno", 
                                                                                      "ApellidoMaterno", 
                                                                                      "Nombres",
@@ -100,7 +100,7 @@ namespace Networks.Controllers
                                                                                      "TerritorialId"
                                                                                     });
 
-                foreach (DataRow Row in DistrictsTable.Rows)
+                foreach (DataRow Row in Table.Rows)
                     Result.Add(new MLider(Int32.Parse(Row["ID"].ToString())
                                                 , Row["ApellidoPaterno"].ToString()
                                                 , Row["ApellidoMaterno"].ToString()
@@ -125,7 +125,7 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable DistrictsTable = DB.GetTable("Promovido", new object[] { "ID", 
+                DataTable Table = DB.GetTable("Promovido", new object[] { "ID", 
                                                                                 "ApellidoPaterno", 
                                                                                 "ApellidoMaterno", 
                                                                                 "Nombres",
@@ -133,7 +133,7 @@ namespace Networks.Controllers
                                                                                 "LiderId"
                                                                             });
 
-                foreach (DataRow Row in DistrictsTable.Rows)
+                foreach (DataRow Row in Table.Rows)
                     Result.Add(new MPromovido(Int32.Parse(Row["ID"].ToString())
                                                 , Row["ApellidoPaterno"].ToString()
                                                 , Row["ApellidoMaterno"].ToString()
@@ -293,10 +293,54 @@ namespace Networks.Controllers
             return Saved;
         }
         #endregion
+
+        #region Search
+        public List<MTerritorial> SearchTerritorial(params object[] criterios)
+        {
+            List<MTerritorial> Result = new List<MTerritorial>();
+
+            try
+            {
+                if (criterios.Length > 0 && (criterios.Length % 2) == 0)
+                {
+                    DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                    StringBuilder WhereStatment = new StringBuilder();
+                    WhereStatment.Append("WHERE ");
+
+                    for (int Index = 0; Index < criterios.Length; Index++)
+                    {
+                        WhereStatment.AppendFormat(@"{0} {1} {2} AND "
+                                                    , criterios[Index]
+                                                    , criterios[Index + 1].ToString().Contains("'") ? "like '%' || " : "="
+                                                    , criterios[Index + 1].ToString().Contains("'") ? criterios[++Index] + " || '%'" : criterios[++Index]);
+                    }
+
+                    WhereStatment = WhereStatment.Remove(WhereStatment.Length - 4, 4);
+                    DataTable Table = DB.GetTable("Territorial", WhereStatment.ToString(), "*");
+
+                    foreach (DataRow Row in Table.Rows)
+                        Result.Add(new MTerritorial(Int32.Parse(Row["ID"].ToString())
+                                                    , Row["ApellidoPaterno"].ToString()
+                                                    , Row["ApellidoMaterno"].ToString()
+                                                    , Row["Nombres"].ToString()
+                                                    , Int32.Parse(Row["SeccionId"].ToString())
+                                                    , Int32.Parse(Row["CoordinadorId"].ToString())
+                                                    ));
+                }
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+
+            return Result;
+        }
+        #endregion
     }
 
     public static class IntegrantsColumns
     {
+        public static string Id = "ID";
         public static string Paterno = "ApellidoPaterno";
         public static string Materno = "ApellidoMaterno";
         public static string Nombres = "Nombres";
