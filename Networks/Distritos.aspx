@@ -9,7 +9,9 @@
        </tr>
        <tr>
            <td colspan="2">
-                <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="DgridDistritos"></asp:DataGrid>
+                <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="DgridDistritos" AlternatingItemStyle-BackColor="#FAEBD7">
+                    <HeaderStyle BackColor="#B40431" Font-Bold="true" ForeColor="White" />                   
+                </asp:DataGrid>
            </td>
        </tr>
        <tr>

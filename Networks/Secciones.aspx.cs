@@ -11,7 +11,7 @@ namespace Networks
 {
     public partial class Secciones : System.Web.UI.Page
     {
-        private CDistritos C;
+        public CDistritos C;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,11 +26,11 @@ namespace Networks
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(TxtName.Text))
+            if (!String.IsNullOrEmpty(TxtName.Text))
             {
                 MDistrito SelectedDistrict = new MDistrito(Int32.Parse(DpDistritos.SelectedItem.Value), DpDistritos.SelectedItem.Text);
                 MSeccion NewSeccion = new MSeccion(SelectedDistrict, TxtName.Text);
-                C.SaveSection(NewSeccion);
+                C.SaveSection(NewSeccion);                
                 ReloadSections();
                 TxtName.Text = string.Empty;
             }
@@ -40,7 +40,7 @@ namespace Networks
         {
             DpDistritos.DataSource = C.GetDistricts();
             DpDistritos.DataTextField = "Nombre";
-            DpDistritos.DataValueField = "Id";
+            DpDistritos.DataValueField = "ID";
             this.DataBind();            
         }
 

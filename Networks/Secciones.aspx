@@ -9,7 +9,9 @@
        </tr>
        <tr>
            <td colspan="2">
-                <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="DgridSecciones"></asp:DataGrid>
+               <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="DgridSecciones"  AlternatingItemStyle-BackColor="#FAEBD7">
+                   <HeaderStyle BackColor="#B40431" Font-Bold="true" ForeColor="White" />                   
+               </asp:DataGrid>
            </td>
        </tr>
        <tr>
@@ -25,5 +27,13 @@
        <tr>
            <td colspan="2" style="text-align:right;" class="space"><asp:Button class="green" runat="server" ID="BtnSave" Text="Guardar" OnClick="BtnSave_Click" /></td>
        </tr>
+       <%if(C.FailSave) 
+         {%>
+       <tr>
+           <td colspan="2" style="color:red;">
+               Parece que ya existe el registro
+           </td>
+       </tr>
+       <%} %>
    </table>
 </asp:Content>

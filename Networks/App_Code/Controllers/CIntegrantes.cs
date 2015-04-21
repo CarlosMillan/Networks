@@ -158,9 +158,9 @@ namespace Networks.Controllers
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 DB.Insert(_type.ToString(), new object[] { "null"
-                                                          , String.Concat("'", coor.Paterno, "'") 
-                                                          , String.Concat("'", coor.Materno, "'") 
-                                                          , String.Concat("'", coor.Nombres, "'")
+                                                          , String.Concat("'", coor.Paterno.ToUpper(), "'") 
+                                                          , String.Concat("'", coor.Materno.ToUpper(), "'") 
+                                                          , String.Concat("'", coor.Nombres.ToUpper(), "'")
                                                           , coor.Seccion
                                                           , 
                                                           });
@@ -178,9 +178,9 @@ namespace Networks.Controllers
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 DB.Insert("Territorial", new object[] { "null"
                                                           , terr.CoordinadorId
-                                                          , String.Concat("'", terr.Paterno, "'") 
-                                                          , String.Concat("'", terr.Materno, "'") 
-                                                          , String.Concat("'", terr.Nombres, "'")
+                                                          , String.Concat("'", terr.Paterno.ToUpper(), "'") 
+                                                          , String.Concat("'", terr.Materno.ToUpper(), "'") 
+                                                          , String.Concat("'", terr.Nombres.ToUpper(), "'")
                                                           , terr.Seccion
                                                           });
             }
@@ -197,9 +197,9 @@ namespace Networks.Controllers
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 DB.Insert("Lider", new object[] { "null"
                                                           , terr.Territorial
-                                                          , String.Concat("'", terr.Paterno, "'") 
-                                                          , String.Concat("'", terr.Materno, "'") 
-                                                          , String.Concat("'", terr.Nombres, "'")
+                                                          , String.Concat("'", terr.Paterno.ToUpper(), "'") 
+                                                          , String.Concat("'", terr.Materno.ToUpper(), "'") 
+                                                          , String.Concat("'", terr.Nombres.ToUpper(), "'")
                                                           , terr.Seccion
                                                           });
             }
@@ -216,9 +216,9 @@ namespace Networks.Controllers
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 DB.Insert("Promovido", new object[] { "null"
                                                           , prom.LiderId
-                                                          , String.Concat("'", prom.Paterno, "'") 
-                                                          , String.Concat("'", prom.Materno, "'") 
-                                                          , String.Concat("'", prom.Nombres, "'")
+                                                          , String.Concat("'", prom.Paterno.ToUpper(), "'") 
+                                                          , String.Concat("'", prom.Materno.ToUpper(), "'") 
+                                                          , String.Concat("'", prom.Nombres.ToUpper(), "'")
                                                           , prom.Seccion
                                                           });
             }

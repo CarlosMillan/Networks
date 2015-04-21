@@ -58,10 +58,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Cincuenta.aspx" />
+    <Content Include="Cincuenta2.aspx" />
     <Content Include="Coordinadores.aspx" />
     <Content Include="Css\General.css" />
     <Content Include="Default.aspx" />
     <Content Include="Distritos.aspx" />
+    <Content Include="Doce.aspx" />
     <Content Include="Lideres.aspx" />
     <Content Include="Promovidos.aspx" />
     <Content Include="Secciones.aspx" />
@@ -78,6 +81,20 @@
     <Compile Include="App_Code\Models\MPromovido.cs" />
     <Compile Include="App_Code\Models\MSeccion.cs" />
     <Compile Include="App_Code\Models\MTerritorial.cs" />
+    <Compile Include="Cincuenta.aspx.cs">
+      <DependentUpon>Cincuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cincuenta.aspx.designer.cs">
+      <DependentUpon>Cincuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cincuenta2.aspx.cs">
+      <DependentUpon>Cincuenta2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cincuenta2.aspx.designer.cs">
+      <DependentUpon>Cincuenta2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Coordinadores.aspx.cs">
       <DependentUpon>Coordinadores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -98,6 +115,13 @@
     </Compile>
     <Compile Include="Distritos.aspx.designer.cs">
       <DependentUpon>Distritos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Doce.aspx.cs">
+      <DependentUpon>Doce.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Doce.aspx.designer.cs">
+      <DependentUpon>Doce.aspx</DependentUpon>
     </Compile>
     <Compile Include="IntegrantesMaster.Master.cs">
       <DependentUpon>IntegrantesMaster.Master</DependentUpon>
