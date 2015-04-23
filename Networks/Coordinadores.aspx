@@ -48,7 +48,7 @@
        <%if(Saved == false)
          { %>
        <tr>
-           <td colspan="4" style="color:red">No se guardo el coordinador seguramente ya existe.</td>
+           <td colspan="4" class="warning">No se guardó el Coordinador. Razones: Ya existe o no se introdujo nombre completo del mismo.</td>
        </tr>   
        <%} %>
 

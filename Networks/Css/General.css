@@ -82,3 +82,9 @@ table.Data td.columnlabel.right {
 table.Data td.columndata {
     width:200px;
 }
+
+.warning {
+    color:red;
+    font-size:16px;
+    font-weight:bold;
+}

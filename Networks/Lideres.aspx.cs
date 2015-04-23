@@ -51,7 +51,7 @@ namespace Networks
         private void ReloadTerritorial()
         {
             DpTerr.DataSource = C.GetTerrotoriales();
-            DpTerr.DataTextField = "Nombres";
+            DpTerr.DataTextField = "NombreCompleto";
             DpTerr.DataValueField = "ID";
             this.DataBind();
         }

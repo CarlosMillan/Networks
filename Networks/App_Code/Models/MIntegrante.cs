@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -18,7 +19,7 @@ namespace Networks.Models
         private string _email;
         private string _phonehome;
         private string _phoneoffice;
-        private string _phonenextel;
+        private string _phonenextel;                
         #endregion
 
         #region Properties
@@ -33,6 +34,8 @@ namespace Networks.Models
         public string Domicilio { get { return _phonehome; } }
         public string Oficina { get { return _phoneoffice; } }
         public string Nextel { get { return _phonenextel; } }
+        [Browsable(false)]
+        public string NombreCompleto { get { return string.Concat(this._lastname, " ", _middlename, " ", _names); } }
         #endregion
 
         public MIntegrante(int id, string lastname, string middlename, string names, string street, string colony, string email, string phonehome, string phoneoffice, string phonenextel)
@@ -56,7 +59,7 @@ namespace Networks.Models
             this._email = email;
             this._phonehome = phonehome;
             this._phoneoffice = phonehome;
-            this._phonenextel = phonenextel;
+            this._phonenextel = phonenextel;            
         }        
     }
 }

@@ -51,7 +51,7 @@ namespace Networks
         private void ReloadLider()
         {
             DpLid.DataSource = C.GetLideres();
-            DpLid.DataTextField = "Nombres";
+            DpLid.DataTextField = "NombreCompleto";
             DpLid.DataValueField = "ID";
             this.DataBind();
         }

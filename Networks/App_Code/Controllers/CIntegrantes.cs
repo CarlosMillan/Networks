@@ -28,7 +28,9 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable Table = DB.GetTable("Coordinador", new object[] { "*" });
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+                DataTable Table = DB.GetTable("Coordinador", OrderByStatment.ToString(), new object[] { "*" });
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MCoordinador(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -60,7 +62,9 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable Table = DB.GetTable("Territorial", new object[] { "*"});
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+                DataTable Table = DB.GetTable("Territorial", OrderByStatment.ToString(),new object[] { "*"});
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MTerritorial(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -93,7 +97,9 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable Table = DB.GetTable("Lider", new object[] { "*" });
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+                DataTable Table = DB.GetTable("Lider", OrderByStatment.ToString(),new object[] { "*" });
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MLider(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -126,7 +132,9 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable Table = DB.GetTable("Promovido", new object[] {"*"});
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+                DataTable Table = DB.GetTable("Promovido", OrderByStatment.ToString(),new object[] {"*"});
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MPromovido(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -174,7 +182,9 @@ namespace Networks.Controllers
             try
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                DataTable Table = DB.GetTable(tablename, new object[] { "*" });
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+                DataTable Table = DB.GetTable(tablename, OrderByStatment.ToString(), new object[] { "*" });
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MIntegrante(Int32.Parse(Row[IntegrantsColumns.Id].ToString())                                                
@@ -205,19 +215,21 @@ namespace Networks.Controllers
             bool Saved = false;
             try
             {
-                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                StringBuilder WhereStatement = new StringBuilder();
-                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                if (!String.IsNullOrEmpty(coor.Paterno) && !String.IsNullOrEmpty(coor.Materno) && !String.IsNullOrEmpty(coor.Nombres))
+                {
+                    DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                    StringBuilder WhereStatement = new StringBuilder();
+                    WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
                                               and ApellidoMaterno like {1}
                                               and Nombres like {2}"
-                                            , Extensions.SParam(coor.Paterno)
-                                            , Extensions.SParam(coor.Materno)
-                                            , Extensions.SParam(coor.Nombres));
-                object ID = DB.GetValue("Coordinador", IntegrantsColumns.Id, WhereStatement.ToString());
+                                                , Extensions.SParam(coor.Paterno)
+                                                , Extensions.SParam(coor.Materno)
+                                                , Extensions.SParam(coor.Nombres));
+                    object ID = DB.GetValue("Coordinador", IntegrantsColumns.Id, WhereStatement.ToString());
 
-                if (ID == null)
-                {
-                    DB.Insert("Coordinador", new object[] { IntegrantsColumns.Id, "null"
+                    if (ID == null)
+                    {
+                        DB.Insert("Coordinador", new object[] { IntegrantsColumns.Id, "null"
                                                               , IntegrantsColumns.Paterno, Extensions.SParam(coor.Paterno)
                                                               , IntegrantsColumns.Materno, Extensions.SParam(coor.Materno)
                                                               , IntegrantsColumns.Nombres, Extensions.SParam(coor.Nombres)
@@ -229,7 +241,8 @@ namespace Networks.Controllers
                                                               , IntegrantsColumns.TelefonoOficina, Extensions.SParam(coor.Oficina)
                                                               , IntegrantsColumns.TelefonoNextel, Extensions.SParam(coor.Nextel)
                                                               });
-                    Saved = true;
+                        Saved = true;
+                    }
                 }
             }
             catch (Exception E)
@@ -245,19 +258,21 @@ namespace Networks.Controllers
             bool Saved = false;
             try
             {
-                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                StringBuilder WhereStatement = new StringBuilder();
-                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                if (!String.IsNullOrEmpty(terr.Paterno) && !String.IsNullOrEmpty(terr.Materno) && !String.IsNullOrEmpty(terr.Nombres))
+                {
+                    DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                    StringBuilder WhereStatement = new StringBuilder();
+                    WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
                                               and ApellidoMaterno like {1}
                                               and Nombres like {2}"
-                                            , Extensions.SParam(terr.Paterno)
-                                            , Extensions.SParam(terr.Materno)
-                                            , Extensions.SParam(terr.Nombres));
-                object ID = DB.GetValue("Territorial", IntegrantsColumns.Id, WhereStatement.ToString());
+                                                , Extensions.SParam(terr.Paterno)
+                                                , Extensions.SParam(terr.Materno)
+                                                , Extensions.SParam(terr.Nombres));
+                    object ID = DB.GetValue("Territorial", IntegrantsColumns.Id, WhereStatement.ToString());
 
-                if (ID == null)
-                {
-                    DB.Insert("Territorial", new object[] { IntegrantsColumns.Id, "null"
+                    if (ID == null)
+                    {
+                        DB.Insert("Territorial", new object[] { IntegrantsColumns.Id, "null"
                                                             , IntegrantsColumns.Coordinador, terr.CoordinadorId
                                                             , IntegrantsColumns.Paterno, Extensions.SParam(terr.Paterno)
                                                             , IntegrantsColumns.Materno, Extensions.SParam(terr.Materno)
@@ -270,7 +285,8 @@ namespace Networks.Controllers
                                                             , IntegrantsColumns.TelefonoOficina, Extensions.SParam(terr.Oficina)
                                                             , IntegrantsColumns.TelefonoNextel, Extensions.SParam(terr.Nextel)
                                                           });
-                    Saved = true;
+                        Saved = true;
+                    }
                 }
             }
             catch (Exception E)
@@ -286,19 +302,21 @@ namespace Networks.Controllers
             bool Saved = false; 
             try
             {
-                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                StringBuilder WhereStatement = new StringBuilder();
-                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                if (!String.IsNullOrEmpty(lid.Paterno) && !String.IsNullOrEmpty(lid.Materno) && !String.IsNullOrEmpty(lid.Nombres))
+                {
+                    DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                    StringBuilder WhereStatement = new StringBuilder();
+                    WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
                                               and ApellidoMaterno like {1}
                                               and Nombres like {2}"
-                                            , Extensions.SParam(lid.Paterno)
-                                            , Extensions.SParam(lid.Materno)
-                                            , Extensions.SParam(lid.Nombres));
-                object ID = DB.GetValue("Lider", IntegrantsColumns.Id, WhereStatement.ToString());
+                                                , Extensions.SParam(lid.Paterno)
+                                                , Extensions.SParam(lid.Materno)
+                                                , Extensions.SParam(lid.Nombres));
+                    object ID = DB.GetValue("Lider", IntegrantsColumns.Id, WhereStatement.ToString());
 
-                if (ID == null)
-                {
-                    DB.Insert("Lider", new object[] { IntegrantsColumns.Id ,"null"
+                    if (ID == null)
+                    {
+                        DB.Insert("Lider", new object[] { IntegrantsColumns.Id ,"null"
                                                     , IntegrantsColumns.Territorial, lid.Territorial
                                                     , IntegrantsColumns.Paterno, Extensions.SParam(lid.Paterno)
                                                     , IntegrantsColumns.Materno, Extensions.SParam(lid.Materno)
@@ -311,7 +329,8 @@ namespace Networks.Controllers
                                                     , IntegrantsColumns.TelefonoOficina, Extensions.SParam(lid.Oficina)
                                                     , IntegrantsColumns.TelefonoNextel, Extensions.SParam(lid.Nextel)
                                                      });
-                    Saved = true;
+                        Saved = true;
+                    }
                 }
             }
             catch (Exception E)
@@ -327,19 +346,21 @@ namespace Networks.Controllers
             bool Saved = false;
             try
             {
-                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                StringBuilder WhereStatement = new StringBuilder();
-                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                if (!String.IsNullOrEmpty(prom.Paterno) && !String.IsNullOrEmpty(prom.Materno) && !String.IsNullOrEmpty(prom.Nombres))
+                {
+                    DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                    StringBuilder WhereStatement = new StringBuilder();
+                    WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
                                               and ApellidoMaterno like {1}
                                               and Nombres like {2}"
-                                            , Extensions.SParam(prom.Paterno)
-                                            , Extensions.SParam(prom.Materno)
-                                            , Extensions.SParam(prom.Nombres));
-                object ID = DB.GetValue("Promovido", IntegrantsColumns.Id, WhereStatement.ToString());
+                                                , Extensions.SParam(prom.Paterno)
+                                                , Extensions.SParam(prom.Materno)
+                                                , Extensions.SParam(prom.Nombres));
+                    object ID = DB.GetValue("Promovido", IntegrantsColumns.Id, WhereStatement.ToString());
 
-                if (ID == null)
-                {
-                    DB.Insert("Promovido", new object[] { IntegrantsColumns.Id, "null"
+                    if (ID == null)
+                    {
+                        DB.Insert("Promovido", new object[] { IntegrantsColumns.Id, "null"
                                                         , IntegrantsColumns.Lider, prom.LiderId
                                                         , IntegrantsColumns.Paterno, Extensions.SParam(prom.Paterno)
                                                         , IntegrantsColumns.Materno, Extensions.SParam(prom.Materno)
@@ -353,7 +374,8 @@ namespace Networks.Controllers
                                                         , IntegrantsColumns.TelefonoNextel, Extensions.SParam(prom.Nextel)
                                                           });
 
-                    Saved = true;
+                        Saved = true;
+                    }
                 }
             }
             catch (Exception E)
@@ -384,19 +406,21 @@ namespace Networks.Controllers
             bool Saved = false;
             try
             {
-                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                StringBuilder WhereStatement = new StringBuilder();
-                WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
+                if (!String.IsNullOrEmpty(inte.Paterno) && !String.IsNullOrEmpty(inte.Materno) && !String.IsNullOrEmpty(inte.Nombres))
+                {
+                    DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                    StringBuilder WhereStatement = new StringBuilder();
+                    WhereStatement.AppendFormat(@"ApellidoPaterno like {0}
                                               and ApellidoMaterno like {1}
                                               and Nombres like {2}"
-                                            , Extensions.SParam(inte.Paterno)
-                                            , Extensions.SParam(inte.Materno)
-                                            , Extensions.SParam(inte.Nombres));
-                object ID = DB.GetValue(tablename, IntegrantsColumns.Id, WhereStatement.ToString());
+                                                , Extensions.SParam(inte.Paterno)
+                                                , Extensions.SParam(inte.Materno)
+                                                , Extensions.SParam(inte.Nombres));
+                    object ID = DB.GetValue(tablename, IntegrantsColumns.Id, WhereStatement.ToString());
 
-                if (ID == null)
-                {
-                    DB.Insert(tablename, new object[] { IntegrantsColumns.Id, "null"
+                    if (ID == null)
+                    {
+                        DB.Insert(tablename, new object[] { IntegrantsColumns.Id, "null"
                                                               , IntegrantsColumns.Paterno, Extensions.SParam(inte.Paterno)
                                                               , IntegrantsColumns.Materno, Extensions.SParam(inte.Materno)
                                                               , IntegrantsColumns.Nombres, Extensions.SParam(inte.Nombres)                                                              
@@ -407,7 +431,8 @@ namespace Networks.Controllers
                                                               , IntegrantsColumns.TelefonoOficina, Extensions.SParam(inte.Oficina)
                                                               , IntegrantsColumns.TelefonoNextel, Extensions.SParam(inte.Nextel)
                                                               });
-                    Saved = true;
+                        Saved = true;
+                    }
                 }
             }
             catch (Exception E)
@@ -429,8 +454,10 @@ namespace Networks.Controllers
                 if (criterios.Length > 0 && (criterios.Length % 2) == 0)
                 {
                     DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
-                    StringBuilder WhereStatment = new StringBuilder();
+                    StringBuilder WhereStatment = new StringBuilder();                   
+                    StringBuilder OrderByStatment = new StringBuilder();
                     WhereStatment.Append("WHERE ");
+                    OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
 
                     for (int Index = 0; Index < criterios.Length; Index++)
                     {
@@ -441,7 +468,7 @@ namespace Networks.Controllers
                     }
 
                     WhereStatment = WhereStatment.Remove(WhereStatment.Length - 4, 4);
-                    DataTable Table = DB.GetTable("Territorial", WhereStatment.ToString(), "*");
+                    DataTable Table = DB.GetTable("Territorial", WhereStatment.ToString(), OrderByStatment.ToString(), new object[] { "*" });
 
                     foreach (DataRow Row in Table.Rows)
                         Result.Add(new MTerritorial(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -477,7 +504,9 @@ namespace Networks.Controllers
                 {
                     DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                     StringBuilder WhereStatment = new StringBuilder();
+                    StringBuilder OrderByStatment = new StringBuilder();
                     WhereStatment.Append("WHERE ");
+                    OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
 
                     for (int Index = 0; Index < criterios.Length; Index++)
                     {
@@ -488,7 +517,7 @@ namespace Networks.Controllers
                     }
 
                     WhereStatment = WhereStatment.Remove(WhereStatment.Length - 4, 4);
-                    DataTable Table = DB.GetTable("Lider", WhereStatment.ToString(), "*");
+                    DataTable Table = DB.GetTable("Lider", WhereStatment.ToString(), OrderByStatment.ToString(), new object[] { "*" });
 
                     foreach (DataRow Row in Table.Rows)
                         Result.Add(new MLider(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -524,7 +553,9 @@ namespace Networks.Controllers
                 {
                     DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                     StringBuilder WhereStatment = new StringBuilder();
+                    StringBuilder OrderByStatment = new StringBuilder();
                     WhereStatment.Append("WHERE ");
+                    OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
 
                     for (int Index = 0; Index < criterios.Length; Index++)
                     {
@@ -535,7 +566,7 @@ namespace Networks.Controllers
                     }
 
                     WhereStatment = WhereStatment.Remove(WhereStatment.Length - 4, 4);
-                    DataTable Table = DB.GetTable("Promovido", WhereStatment.ToString(), "*");
+                    DataTable Table = DB.GetTable("Promovido", WhereStatment.ToString(), OrderByStatment.ToString(), new object[] { "*" });
 
                     foreach (DataRow Row in Table.Rows)
                         Result.Add(new MPromovido(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -581,7 +612,9 @@ namespace Networks.Controllers
                 {
                     DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                     StringBuilder WhereStatment = new StringBuilder();
+                    StringBuilder OrderByStatment = new StringBuilder();
                     WhereStatment.Append("WHERE ");
+                    OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
 
                     for (int Index = 0; Index < criterios.Length; Index++)
                     {
@@ -592,7 +625,7 @@ namespace Networks.Controllers
                     }
 
                     WhereStatment = WhereStatment.Remove(WhereStatment.Length - 4, 4);
-                    DataTable Table = DB.GetTable(tablename, WhereStatment.ToString(), "*");
+                    DataTable Table = DB.GetTable(tablename, WhereStatment.ToString(), OrderByStatment.ToString(), new object[] {"*"});
 
                     foreach (DataRow Row in Table.Rows)
                         Result.Add(new MIntegrante(Int32.Parse(Row[IntegrantsColumns.Id].ToString())                                                    

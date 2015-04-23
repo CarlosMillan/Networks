@@ -55,7 +55,7 @@
      <%if(Saved == false)
          { %>
        <tr>
-           <td colspan="4" style="color:red">No se guardo el promovido seguramente ya existe.</td>
+           <td colspan="4" class="warning">No se guardó el Promovido. Razones: Ya existe o no se introdujo nombre completo del mismo.</td>
        </tr>   
        <%} %>
         <asp:DataGrid CssClass="space data" AutoGenerateColumns="true" runat="server" ID="DgridProm" AlternatingItemStyle-BackColor="#FAEBD7">

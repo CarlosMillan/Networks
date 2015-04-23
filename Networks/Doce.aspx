@@ -42,7 +42,7 @@
        <%if(Saved == false)
          { %>
        <tr>
-           <td colspan="2" style="color:red">No se guardo el coordinador seguramente ya existe.</td>
+           <td colspan="4" class="warning">No se guardó el Integrante. Razones: Ya existe o no se introdujo nombre completo del mismo.</td>
        </tr>   
        <%} %>
         <asp:DataGrid CssClass="space" AutoGenerateColumns="true" runat="server" ID="Dgrid12"  AlternatingItemStyle-BackColor="#FAEBD7">

@@ -36,7 +36,7 @@ namespace Networks
 
         private void ReloadIntegrantsTable(List<MTerritorial> filtered)
         {
-            DgridTerr.DataSource = filtered;
+            DgridTerr.DataSource = filtered;            
             this.DataBind();
         }
 
@@ -51,7 +51,7 @@ namespace Networks
         private void ReloadCoordinadores()
         {
             DpCoor.DataSource = C.GetCoordindores();
-            DpCoor.DataTextField = "Nombres";
+            DpCoor.DataTextField = "NombreCompleto";
             DpCoor.DataValueField = "ID";
             this.DataBind();
         }
