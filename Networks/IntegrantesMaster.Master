@@ -22,7 +22,7 @@
         <a href="Doce.aspx">Los 12</a>
     </nav>
         <br />
-    <div class="flexcontainer">
+    <div class="flexcontainerColumn">
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>

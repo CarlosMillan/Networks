@@ -1,6 +1,6 @@
 ﻿body {
     font-family:'Segoe UI';
-    font-size: 14px;;
+    font-size: 12px;
 }
 
 input[type=submit] {
@@ -34,6 +34,23 @@ input[type=submit].green {
     padding: 20px; 
 }
 
+.flexcontainerColumn {
+    position:absolute;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: column;    
+    width: 95.5%;
+    /*background-color:lightblue;*/
+    height: auto;
+    justify-content:center;   
+    -webkit-align-items: center;
+    align-items: center;
+    border-radius: 25px;
+    border: 2px solid #8AC007;
+    padding: 20px; 
+}
+
 .flexcontainer > div {
     text-align: center;
     width:300px;
@@ -52,4 +69,16 @@ input[type=submit].green {
 table td.space {
     padding-top:10px;
     padding-bottom:10px;
+}
+
+table.Data td.columnlabel {
+    width:128px;
+}
+
+table.Data td.columnlabel.right {
+    padding-left:30px;
+}
+
+table.Data td.columndata {
+    width:200px;
 }

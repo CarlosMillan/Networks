@@ -57,17 +57,26 @@ namespace Networks
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)
-        {
-            MTerritorial NewTerritorial = new MTerritorial(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value), Int32.Parse(DpCoor.SelectedItem.Value));
+        {                           
+            MTerritorial NewTerritorial = new MTerritorial(Int32.Parse(DpCoor.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
+                                                        , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text);
             Saved = C.SaveTerritorial(NewTerritorial);
             ReloadIntegrantsTable();
-            Clear();
+
+            if (Saved == true) Clear();
         }
+
         private void Clear()
         {
             TxtLastName.Text = string.Empty;
             TxtMiddleName.Text = string.Empty;
             TxtNames.Text = string.Empty;
+            TxtStret.Text = string.Empty;
+            TxtColony.Text = string.Empty;
+            TxtEmail.Text = string.Empty;
+            TxtPhoneHome.Text = string.Empty;
+            TxtPhoneOffice.Text = string.Empty;
+            TxtPhoneNextel.Text = string.Empty;
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)

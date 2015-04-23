@@ -11,16 +11,16 @@ namespace Networks.Models
 
         public int Territorial { get { return _terrid; } }
 
-        public MLider(int id, string lastname, string middlename, string names, int sectionid, int coorid) 
-            : base(id, lastname, middlename, names, sectionid) 
+        public MLider(int id, int terrid, string lastname, string middlename, string names, int sectionid, string street, string colony, string email, string phonehome, string phoneoffice, string phonenextel)
+            : base(id, lastname, middlename, names, sectionid, street, colony, email, phonehome, phoneoffice, phonenextel)
         {
-            this._terrid = coorid;
+            this._terrid = terrid;
         }
 
-        public MLider(string lastname, string middlename, string names, int sectionid, int coorid)
-            :base(lastname, middlename, names, sectionid)
+        public MLider(int terrid, string lastname, string middlename, string names, int sectionid, string street, string colony, string email, string phonehome, string phoneoffice, string phonenextel)
+            : base(lastname, middlename, names, sectionid, street, colony, email, phonehome, phoneoffice,phonenextel)
         {
-            this._terrid = coorid;
+            this._terrid = terrid;
         }
     }
 }

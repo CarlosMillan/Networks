@@ -43,10 +43,12 @@ namespace Networks
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            MCoordinador NewIntegrant = new MCoordinador(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value));
+            MCoordinador NewIntegrant = new MCoordinador(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
+                                                        ,TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text);
             Saved = C.SaveCoordinador(NewIntegrant);
             ReloadIntegrants();
-            Clear();
+            
+            if(Saved == true) Clear();
         }
 
         private void Clear()
@@ -54,6 +56,12 @@ namespace Networks
             TxtLastName.Text = string.Empty;
             TxtMiddleName.Text = string.Empty;
             TxtNames.Text = string.Empty;
+            TxtStret.Text = string.Empty;
+            TxtColony.Text = string.Empty;
+            TxtEmail.Text = string.Empty;
+            TxtPhoneHome.Text = string.Empty;
+            TxtPhoneOffice.Text = string.Empty;
+            TxtPhoneNextel.Text = string.Empty;
         }
     }
 }

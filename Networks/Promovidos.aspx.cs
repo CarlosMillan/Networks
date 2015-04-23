@@ -31,7 +31,12 @@ namespace Networks
 
         private void ReloadIntegrantsTable()
         {
-            DgridProm.DataSource = C.GetPromovidos();
+            ReloadIntegrantsTable(C.GetPromovidos());
+        }
+
+        private void ReloadIntegrantsTable(List<MPromovido> filtered)
+        {
+            DgridProm.DataSource = filtered;
             this.DataBind();
         }
 
@@ -53,11 +58,12 @@ namespace Networks
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            MPromovido NewProm = new MPromovido(TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value), Int32.Parse(DpLid.SelectedItem.Value));
+            MPromovido NewProm = new MPromovido(Int32.Parse(DpLid.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
+                                                        , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text);
             Saved = C.SavePromovido(NewProm);
             ReloadIntegrantsTable();
             ReloadLider();
-            Clear();
+            if (Saved == true) Clear();
         }
 
         private void Clear()
@@ -65,6 +71,37 @@ namespace Networks
             TxtLastName.Text = string.Empty;
             TxtMiddleName.Text = string.Empty;
             TxtNames.Text = string.Empty;
+            TxtStret.Text = string.Empty;
+            TxtColony.Text = string.Empty;
+            TxtEmail.Text = string.Empty;
+            TxtPhoneHome.Text = string.Empty;
+            TxtPhoneOffice.Text = string.Empty;
+            TxtPhoneNextel.Text = string.Empty;
+        }
+
+        protected void BtnSearch_Click(object sender, EventArgs e)
+        {
+            List<object> CriteriosList = new List<object>();
+
+            if (!String.IsNullOrEmpty(TxtLastName.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.Paterno);
+                CriteriosList.Add(Extensions.SParam(TxtLastName.Text));
+            }
+
+            if (!String.IsNullOrEmpty(TxtMiddleName.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.Materno);
+                CriteriosList.Add(Extensions.SParam(TxtMiddleName.Text));
+            }
+
+            if (!String.IsNullOrEmpty(TxtNames.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.Nombres);
+                CriteriosList.Add(Extensions.SParam(TxtNames.Text));
+            }
+
+            ReloadIntegrantsTable(C.SearchPromovido(CriteriosList.ToArray()));
         }
     }
 }
