@@ -37,16 +37,20 @@
        <tr>
            <td class="space columnlabel">Email:</td>
            <td><asp:TextBox runat="server" ID="TxtEmail"  CssClass="columndata"></asp:TextBox></td>
-       </tr>
-       <tr>
-           <td class="space columnlabel">Telefono-Domicilio:</td>
+           <td class="space columnlabel right">Telefono-Domicilio:</td>
            <td><asp:TextBox runat="server" ID="TxtPhoneHome"  CssClass="columndata"></asp:TextBox></td>
-           <td class="space columnlabel right">Telefono-Oficina:</td>
-           <td><asp:TextBox runat="server" ID="TxtPhoneOffice"  CssClass="columndata"></asp:TextBox></td>
        </tr>
        <tr>
-           <td class="space columnlabel">Nextel:</td>
-           <td><asp:TextBox runat="server" ID="TxtPhoneNextel" W CssClass="columndata"></asp:TextBox></td>
+           <td class="space columnlabel">Telefono-Oficina:</td>
+           <td><asp:TextBox runat="server" ID="TxtPhoneOffice" CssClass="columndata"></asp:TextBox></td>
+           <td class="space columnlabel right">Nextel:</td>
+           <td><asp:TextBox runat="server" ID="TxtPhoneNextel" CssClass="columndata"></asp:TextBox></td>
+       </tr>
+       <tr>
+           <td class="space columnlabel">Clave de elector:</td>
+           <td><asp:TextBox runat="server" ID="TxtElector" CssClass="columndata"></asp:TextBox></td>
+           <td class="space columnlabel right">Parentesco:</td>
+           <td><asp:TextBox runat="server" ID="TxtRelation" CssClass="columndata"></asp:TextBox></td>
        </tr>
        <tr>
            <td colspan="2" style="text-align:center;" class="space"><asp:Button class="green" runat="server" ID="BtnSearch" Text="Buscar" OnClick="BtnSearch_Click" /></td>       

@@ -114,6 +114,7 @@ namespace Networks.Controllers
                                                 , Row[IntegrantsColumns.TelefonoDomicilio].ToString()
                                                 , Row[IntegrantsColumns.TelefonoOficina].ToString()
                                                 , Row[IntegrantsColumns.TelefonoNextel].ToString()
+                                                , Row[IntegrantsColumns.ClaveElector].ToString()
                                                 ));
 
             }
@@ -149,6 +150,8 @@ namespace Networks.Controllers
                                                 , Row[IntegrantsColumns.TelefonoDomicilio].ToString()
                                                 , Row[IntegrantsColumns.TelefonoOficina].ToString()
                                                 , Row[IntegrantsColumns.TelefonoNextel].ToString()
+                                                , Row[IntegrantsColumns.ClaveElector].ToString()
+                                                , Row[IntegrantsColumns.Parentesco].ToString()
                                                 ));
 
             }
@@ -328,6 +331,7 @@ namespace Networks.Controllers
                                                     , IntegrantsColumns.TelefonoDomicilio, Extensions.SParam(lid.Domicilio)
                                                     , IntegrantsColumns.TelefonoOficina, Extensions.SParam(lid.Oficina)
                                                     , IntegrantsColumns.TelefonoNextel, Extensions.SParam(lid.Nextel)
+                                                    , IntegrantsColumns.ClaveElector, Extensions.SParam(lid.Elector)
                                                      });
                         Saved = true;
                     }
@@ -372,6 +376,8 @@ namespace Networks.Controllers
                                                         , IntegrantsColumns.TelefonoDomicilio, Extensions.SParam(prom.Domicilio)
                                                         , IntegrantsColumns.TelefonoOficina, Extensions.SParam(prom.Oficina)
                                                         , IntegrantsColumns.TelefonoNextel, Extensions.SParam(prom.Nextel)
+                                                        , IntegrantsColumns.ClaveElector, Extensions.SParam(prom.Elector)
+                                                        , IntegrantsColumns.Parentesco, Extensions.SParam(prom.Parentesco)
                                                           });
 
                         Saved = true;
@@ -532,6 +538,7 @@ namespace Networks.Controllers
                                                     , Row[IntegrantsColumns.TelefonoDomicilio].ToString()
                                                     , Row[IntegrantsColumns.TelefonoOficina].ToString()
                                                     , Row[IntegrantsColumns.TelefonoNextel].ToString()
+                                                    , Row[IntegrantsColumns.ClaveElector].ToString()
                                                     ));
                 }
             }
@@ -581,6 +588,8 @@ namespace Networks.Controllers
                                                     , Row[IntegrantsColumns.TelefonoDomicilio].ToString()
                                                     , Row[IntegrantsColumns.TelefonoOficina].ToString()
                                                     , Row[IntegrantsColumns.TelefonoNextel].ToString()
+                                                    , Row[IntegrantsColumns.ClaveElector].ToString()
+                                                    , Row[IntegrantsColumns.Parentesco].ToString()
                                                     ));
                 }
             }
@@ -666,6 +675,8 @@ namespace Networks.Controllers
         public static string TelefonoNextel = "TelefonoNextel";
         public static string Lider = "LiderId";
         public static string Territorial = "TerritorialId";
-        public static string Coordinador = "CoordinadorID";        			
+        public static string Coordinador = "CoordinadorID";
+        public static string ClaveElector = "ClaveElector";
+        public static string Parentesco = "Relacion";
     }
 }

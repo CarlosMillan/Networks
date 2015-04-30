@@ -59,7 +59,7 @@ namespace Networks
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             MPromovido NewProm = new MPromovido(Int32.Parse(DpLid.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
-                                                        , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text);
+                                                , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text, TxtElector.Text, TxtRelation.Text);
             Saved = C.SavePromovido(NewProm);
             ReloadIntegrantsTable();
             ReloadLider();
@@ -77,6 +77,8 @@ namespace Networks
             TxtPhoneHome.Text = string.Empty;
             TxtPhoneOffice.Text = string.Empty;
             TxtPhoneNextel.Text = string.Empty;
+            TxtElector.Text = string.Empty;
+            TxtRelation.Text = string.Empty;
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)
@@ -99,6 +101,12 @@ namespace Networks
             {
                 CriteriosList.Add(IntegrantsColumns.Nombres);
                 CriteriosList.Add(Extensions.SParam(TxtNames.Text));
+            }
+
+            if (!String.IsNullOrEmpty(TxtElector.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.ClaveElector);
+                CriteriosList.Add(Extensions.SParam(TxtElector.Text));
             }
 
             ReloadIntegrantsTable(C.SearchPromovido(CriteriosList.ToArray()));

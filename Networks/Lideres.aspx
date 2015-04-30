@@ -47,6 +47,8 @@
        <tr>
            <td class="space columnlabel">Nextel:</td>
            <td><asp:TextBox runat="server" ID="TxtPhoneNextel" W CssClass="columndata"></asp:TextBox></td>
+           <td class="space columnlabel right">Clave de elector:</td>
+           <td><asp:TextBox runat="server" ID="TxtElector" W CssClass="columndata"></asp:TextBox></td>
        </tr>
        <tr>
            <td colspan="2" style="text-align:center;" class="space"><asp:Button class="green" runat="server" ID="BtnSearch" Text="Buscar" OnClick="BtnSearch_Click" /></td>       

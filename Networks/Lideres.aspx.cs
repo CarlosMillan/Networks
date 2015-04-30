@@ -59,7 +59,7 @@ namespace Networks
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             MLider NewLider = new MLider(Int32.Parse(DpTerr.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
-                                                        , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text);
+                                                        , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text, TxtElector.Text);
             Saved = C.SaveLider(NewLider);
             ReloadIntegrantsTable();
             ReloadTerritorial();
@@ -77,6 +77,7 @@ namespace Networks
             TxtPhoneHome.Text = string.Empty;
             TxtPhoneOffice.Text = string.Empty;
             TxtPhoneNextel.Text = string.Empty;
+            TxtElector.Text = string.Empty;
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)
@@ -89,16 +90,22 @@ namespace Networks
                 CriteriosList.Add(Extensions.SParam(TxtLastName.Text));
             }
 
+            if (!String.IsNullOrEmpty(TxtNames.Text))
+            {
+                CriteriosList.Add(IntegrantsColumns.Nombres);
+                CriteriosList.Add(Extensions.SParam(TxtNames.Text));
+            }
+
             if (!String.IsNullOrEmpty(TxtMiddleName.Text))
             {
                 CriteriosList.Add(IntegrantsColumns.Materno);
                 CriteriosList.Add(Extensions.SParam(TxtMiddleName.Text));
             }
 
-            if (!String.IsNullOrEmpty(TxtNames.Text))
+            if (!String.IsNullOrEmpty(TxtElector.Text))
             {
-                CriteriosList.Add(IntegrantsColumns.Nombres);
-                CriteriosList.Add(Extensions.SParam(TxtNames.Text));
+                CriteriosList.Add(IntegrantsColumns.ClaveElector);
+                CriteriosList.Add(Extensions.SParam(TxtElector.Text));
             }
 
             ReloadIntegrantsTable(C.SearchLider(CriteriosList.ToArray()));
