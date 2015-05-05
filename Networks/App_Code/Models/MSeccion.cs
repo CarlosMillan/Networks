@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Networks.Models
 {
+    [Serializable]
     public class MSeccion
     {
         private MDistrito _district;

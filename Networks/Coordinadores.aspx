@@ -9,7 +9,10 @@
        <tr>
            <td class="space">Sección:</td>
            <td>
-               <asp:DropDownList runat="server" ID="DpSeccion"></asp:DropDownList>
+               <asp:DropDownList runat="server" ID="DpSeccion" AutoPostBack="True" OnSelectedIndexChanged="DpSeccion_SelectedIndexChanged"></asp:DropDownList>
+           </td>
+           <td>
+               <asp:Label runat="server" ID="LblDistrict" Text="sample"></asp:Label>
            </td>
        </tr>
        <tr>

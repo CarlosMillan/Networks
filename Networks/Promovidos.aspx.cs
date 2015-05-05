@@ -14,6 +14,7 @@ namespace Networks
         private CIntegrantes C;
         private CDistritos CD;
         public bool? Saved;
+        private List<MSeccion> Sections;        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,6 +28,8 @@ namespace Networks
                 ReloadSections();
                 ReloadLider();
             }
+            else            
+                Sections = (List<MSeccion>)ViewState["Sections"];
         }
 
         private void ReloadIntegrantsTable()
@@ -42,10 +45,13 @@ namespace Networks
 
         private void ReloadSections()
         {
-            DpSeccion.DataSource = CD.GetSections();
+            Sections = CD.GetSections();
+            DpSeccion.DataSource = Sections;
+            ViewState["Sections"] = Sections;
             DpSeccion.DataTextField = "Nombre";
             DpSeccion.DataValueField = "ID";
             this.DataBind();
+            ShowDistrict();
         }
 
         private void ReloadLider()
@@ -58,12 +64,15 @@ namespace Networks
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            MPromovido NewProm = new MPromovido(Int32.Parse(DpLid.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
-                                                , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text, TxtElector.Text, TxtRelation.Text);
-            Saved = C.SavePromovido(NewProm);
-            ReloadIntegrantsTable();
-            ReloadLider();
-            if (Saved == true) Clear();
+            if (DpSeccion.SelectedItem != null)
+            {
+                MPromovido NewProm = new MPromovido(Int32.Parse(DpLid.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
+                                                    , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text, TxtElector.Text, CmbRelation.SelectedItem.Value);
+                Saved = C.SavePromovido(NewProm);
+                ReloadIntegrantsTable();
+                ReloadLider();
+                if (Saved == true) Clear();
+            }
         }
 
         private void Clear()
@@ -78,7 +87,7 @@ namespace Networks
             TxtPhoneOffice.Text = string.Empty;
             TxtPhoneNextel.Text = string.Empty;
             TxtElector.Text = string.Empty;
-            TxtRelation.Text = string.Empty;
+            CmbRelation.SelectedIndex = 0;
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)
@@ -110,6 +119,23 @@ namespace Networks
             }
 
             ReloadIntegrantsTable(C.SearchPromovido(CriteriosList.ToArray()));
+        }
+
+        protected void DpSeccion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowDistrict();
+        }
+
+        private void ShowDistrict()
+        {
+            try
+            {
+                LblDistrict.Text = Sections.Find(x => x.Id == Int32.Parse(DpSeccion.SelectedItem.Value)).Distrito;
+            }
+            catch (Exception E)
+            {
+                LblDistrict.Text = "SIN DISTRITO";
+            }
         }
     }
 }

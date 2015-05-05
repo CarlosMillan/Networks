@@ -79,6 +79,7 @@ namespace Networks.Controllers
                                                 , Row[IntegrantsColumns.TelefonoDomicilio].ToString()
                                                 , Row[IntegrantsColumns.TelefonoOficina].ToString()
                                                 , Row[IntegrantsColumns.TelefonoNextel].ToString()
+                                                , Row[IntegrantsColumns.ClaveElector].ToString()
                                                 ));
 
             }
@@ -287,6 +288,7 @@ namespace Networks.Controllers
                                                             , IntegrantsColumns.TelefonoDomicilio, Extensions.SParam(terr.Domicilio)
                                                             , IntegrantsColumns.TelefonoOficina, Extensions.SParam(terr.Oficina)
                                                             , IntegrantsColumns.TelefonoNextel, Extensions.SParam(terr.Nextel)
+                                                            , IntegrantsColumns.ClaveElector, Extensions.SParam(terr.Elector)
                                                           });
                         Saved = true;
                     }
@@ -489,6 +491,7 @@ namespace Networks.Controllers
                                                     , Row[IntegrantsColumns.TelefonoDomicilio].ToString()
                                                     , Row[IntegrantsColumns.TelefonoOficina].ToString()
                                                     , Row[IntegrantsColumns.TelefonoNextel].ToString()
+                                                    , Row[IntegrantsColumns.ClaveElector].ToString()
                                                     ));
                 }
             }

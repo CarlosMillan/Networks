@@ -9,7 +9,10 @@
        <tr>
            <td class="space">Sección:</td>
            <td>
-               <asp:DropDownList runat="server" ID="DpSeccion"></asp:DropDownList>
+               <asp:DropDownList runat="server" ID="DpSeccion" AutoPostBack="true" OnSelectedIndexChanged="DpSeccion_SelectedIndexChanged"></asp:DropDownList>
+           </td>
+           <td>
+               <asp:Label runat="server" ID="LblDistrict" Text="sample"></asp:Label>
            </td>
        </tr>
        <tr>
@@ -40,13 +43,15 @@
        </tr>
        <tr>
            <td class="space columnlabel">Telefono-Domicilio:</td>
-           <td><asp:TextBox runat="server" ID="TxtPhoneHome"  CssClass="columndata"></asp:TextBox></td>
+           <td><asp:TextBox runat="server" ID="TxtPhoneHome" CssClass="columndata"></asp:TextBox></td>
            <td class="space columnlabel right">Telefono-Oficina:</td>
-           <td><asp:TextBox runat="server" ID="TxtPhoneOffice"  CssClass="columndata"></asp:TextBox></td>
+           <td><asp:TextBox runat="server" ID="TxtPhoneOffice" CssClass="columndata"></asp:TextBox></td>
        </tr>
        <tr>
            <td class="space columnlabel">Nextel:</td>
-           <td><asp:TextBox runat="server" ID="TxtPhoneNextel" W CssClass="columndata"></asp:TextBox></td>
+           <td><asp:TextBox runat="server" ID="TxtPhoneNextel" CssClass="columndata"></asp:TextBox></td>
+           <td class="space columnlabel right">Clave de elector:</td>
+           <td><asp:TextBox runat="server" ID="TxtElector" CssClass="columndata"></asp:TextBox></td>
        </tr>
        <tr>
            <td colspan="2" style="text-align:center;" class="space"><asp:Button class="green" runat="server" ID="BtnSearch" Text="Buscar" OnClick="BtnSearch_Click" /></td>       

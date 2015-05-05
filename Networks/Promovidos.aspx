@@ -9,7 +9,10 @@
        <tr>
            <td class="space">Sección:</td>
            <td>
-               <asp:DropDownList runat="server" ID="DpSeccion"></asp:DropDownList>
+               <asp:DropDownList runat="server" ID="DpSeccion" AutoPostBack="true" OnSelectedIndexChanged="DpSeccion_SelectedIndexChanged"></asp:DropDownList>
+           </td>
+           <td>
+               <asp:Label runat="server" ID="LblDistrict" Text="sample"></asp:Label>
            </td>
        </tr>
        <tr>
@@ -49,8 +52,15 @@
        <tr>
            <td class="space columnlabel">Clave de elector:</td>
            <td><asp:TextBox runat="server" ID="TxtElector" CssClass="columndata"></asp:TextBox></td>
-           <td class="space columnlabel right">Parentesco:</td>
-           <td><asp:TextBox runat="server" ID="TxtRelation" CssClass="columndata"></asp:TextBox></td>
+           <td class="space columnlabel right">Relación:</td>
+           <td><asp:DropDownList runat="server" ID="CmbRelation">
+                        <asp:ListItem>Parentesco</asp:ListItem>
+                        <asp:ListItem>Amistad</asp:ListItem>
+                        <asp:ListItem>Trabajo</asp:ListItem>
+                        <asp:ListItem>Vencidad</asp:ListItem>
+                        <asp:ListItem>Otro</asp:ListItem>
+               </asp:DropDownList>
+           </td>
        </tr>
        <tr>
            <td colspan="2" style="text-align:center;" class="space"><asp:Button class="green" runat="server" ID="BtnSearch" Text="Buscar" OnClick="BtnSearch_Click" /></td>       

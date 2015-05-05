@@ -14,6 +14,7 @@ namespace Networks
         private CIntegrantes C;
         private CDistritos CD;
         public bool? Saved;
+        private List<MSeccion> Sections;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,6 +28,8 @@ namespace Networks
                 ReloadSections();
                 ReloadTerritorial();
             }
+            else
+                Sections = (List<MSeccion>)ViewState["Sections"];
         }
 
         private void ReloadIntegrantsTable()
@@ -42,10 +45,13 @@ namespace Networks
 
         private void ReloadSections()
         {
-            DpSeccion.DataSource = CD.GetSections();
+            Sections = CD.GetSections();
+            DpSeccion.DataSource = Sections;
+            ViewState["Sections"] = Sections;
             DpSeccion.DataTextField = "Nombre";
             DpSeccion.DataValueField = "ID";
             this.DataBind();
+            ShowDistrict();
         }
 
         private void ReloadTerritorial()
@@ -58,12 +64,15 @@ namespace Networks
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            MLider NewLider = new MLider(Int32.Parse(DpTerr.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
-                                                        , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text, TxtElector.Text);
-            Saved = C.SaveLider(NewLider);
-            ReloadIntegrantsTable();
-            ReloadTerritorial();
-            if(Saved == true) Clear();
+            if (DpSeccion.SelectedItem != null)
+            {
+                MLider NewLider = new MLider(Int32.Parse(DpTerr.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
+                                                            , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text, TxtElector.Text);
+                Saved = C.SaveLider(NewLider);
+                ReloadIntegrantsTable();
+                ReloadTerritorial();
+                if (Saved == true) Clear();
+            }
         }
 
         private void Clear()
@@ -109,6 +118,23 @@ namespace Networks
             }
 
             ReloadIntegrantsTable(C.SearchLider(CriteriosList.ToArray()));
+        }
+
+        protected void DpSeccion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowDistrict();
+        }
+
+        private void ShowDistrict()
+        {
+            try
+            {
+                LblDistrict.Text = Sections.Find(x => x.Id == Int32.Parse(DpSeccion.SelectedItem.Value)).Distrito;
+            }
+            catch (Exception E)
+            {
+                LblDistrict.Text = "SIN DISTRITO";
+            }
         }
     }
 }

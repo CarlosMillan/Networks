@@ -14,6 +14,7 @@ namespace Networks
         private CIntegrantes C;
         private CDistritos CD;
         public bool? Saved;
+        private List<MSeccion> Sections;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,6 +28,8 @@ namespace Networks
                 ReloadSections();
                 ReloadCoordinadores();
             }
+            else
+                Sections = (List<MSeccion>)ViewState["Sections"];
         }
 
         private void ReloadIntegrantsTable()
@@ -42,10 +45,13 @@ namespace Networks
 
         private void ReloadSections()
         {
-            DpSeccion.DataSource = CD.GetSections();
+            Sections = CD.GetSections();
+            DpSeccion.DataSource = Sections;
+            ViewState["Sections"] = Sections;
             DpSeccion.DataTextField = "Nombre";
             DpSeccion.DataValueField = "ID";
             this.DataBind();
+            ShowDistrict();
         }
 
         private void ReloadCoordinadores()
@@ -57,13 +63,16 @@ namespace Networks
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)
-        {                           
-            MTerritorial NewTerritorial = new MTerritorial(Int32.Parse(DpCoor.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
-                                                        , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text);
-            Saved = C.SaveTerritorial(NewTerritorial);
-            ReloadIntegrantsTable();
+        {
+            if (DpSeccion.SelectedItem != null)
+            {
+                MTerritorial NewTerritorial = new MTerritorial(Int32.Parse(DpCoor.SelectedItem.Value), TxtLastName.Text, TxtMiddleName.Text, TxtNames.Text, Int32.Parse(DpSeccion.SelectedItem.Value)
+                                                            , TxtStret.Text, TxtColony.Text, TxtEmail.Text, TxtPhoneHome.Text, TxtPhoneOffice.Text, TxtPhoneNextel.Text, TxtElector.Text);
+                Saved = C.SaveTerritorial(NewTerritorial);
+                ReloadIntegrantsTable();
 
-            if (Saved == true) Clear();
+                if (Saved == true) Clear();
+            }
         }
 
         private void Clear()
@@ -77,6 +86,7 @@ namespace Networks
             TxtPhoneHome.Text = string.Empty;
             TxtPhoneOffice.Text = string.Empty;
             TxtPhoneNextel.Text = string.Empty;
+            TxtElector.Text = string.Empty;
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)
@@ -102,6 +112,23 @@ namespace Networks
             }
 
             ReloadIntegrantsTable(C.SearchTerritorial(CriteriosList.ToArray()));
+        }
+
+        protected void DpSeccion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowDistrict();
+        }
+
+        private void ShowDistrict()
+        {
+            try
+            {
+                LblDistrict.Text = Sections.Find(x => x.Id == Int32.Parse(DpSeccion.SelectedItem.Value)).Distrito;
+            }
+            catch (Exception E)
+            {
+                LblDistrict.Text = "SIN DISTRITO";
+            }
         }
     }
 }

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networks", "Networks\Networks.csproj", "{283F4355-A7B7-4D97-96D3-29C492179A63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteDBManger", "..\SQLiteDB\SQLiteDBManger\SQLiteDBManger\SQLiteDBManger.csproj", "{DF24CE10-3DDB-4C72-A23C-AC201807464E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{283F4355-A7B7-4D97-96D3-29C492179A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{283F4355-A7B7-4D97-96D3-29C492179A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{283F4355-A7B7-4D97-96D3-29C492179A63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF24CE10-3DDB-4C72-A23C-AC201807464E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF24CE10-3DDB-4C72-A23C-AC201807464E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF24CE10-3DDB-4C72-A23C-AC201807464E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF24CE10-3DDB-4C72-A23C-AC201807464E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

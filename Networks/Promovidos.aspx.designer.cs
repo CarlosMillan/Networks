@@ -22,6 +22,15 @@ namespace Networks {
         protected global::System.Web.UI.WebControls.DropDownList DpSeccion;
         
         /// <summary>
+        /// LblDistrict control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblDistrict;
+        
+        /// <summary>
         /// DpLid control.
         /// </summary>
         /// <remarks>
@@ -121,13 +130,13 @@ namespace Networks {
         protected global::System.Web.UI.WebControls.TextBox TxtElector;
         
         /// <summary>
-        /// TxtRelation control.
+        /// CmbRelation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtRelation;
+        protected global::System.Web.UI.WebControls.DropDownList CmbRelation;
         
         /// <summary>
         /// BtnSearch control.

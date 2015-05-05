@@ -11,7 +11,7 @@ namespace Networks
         [DebuggerStepThrough]
         public static string SParam(string value)
         {
-            return String.Concat("'", value, "'");
+            return String.Concat("'", value.Trim(), "'");
         }
     }
 }
