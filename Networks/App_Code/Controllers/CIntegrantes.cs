@@ -29,7 +29,37 @@ namespace Networks.Controllers
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 StringBuilder OrderByStatment = new StringBuilder();
-                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+                StringBuilder Columns = new StringBuilder();
+                Columns.AppendFormat("{0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+
+                OrderByStatment.AppendFormat(@"ORDER BY {0}", Columns.ToString());
+                DataTable Table = DB.GetTable("Coordinador", OrderByStatment.ToString(), new object[] { IntegrantsColumns.Id + "," + Columns.ToString() });
+
+                foreach (DataRow Row in Table.Rows)
+                    Result.Add(new MCoordinador(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
+                                                , Row[IntegrantsColumns.Paterno].ToString()
+                                                , Row[IntegrantsColumns.Materno].ToString()
+                                                , Row[IntegrantsColumns.Nombres].ToString()                                               
+                                                ));
+
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+
+            return Result;
+        }
+
+        public List<MCoordinador> GetCoordindoresTable()
+        {
+            List<MCoordinador> Result = new List<MCoordinador>();
+
+            try
+            {
+                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0} DESC LIMIT {1}", IntegrantsColumns.Id, ConfigurationManager.AppSettings["MaxElementsPerPage"]);
                 DataTable Table = DB.GetTable("Coordinador", OrderByStatment.ToString(), new object[] { "*" });
 
                 foreach (DataRow Row in Table.Rows)
@@ -63,8 +93,38 @@ namespace Networks.Controllers
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 StringBuilder OrderByStatment = new StringBuilder();
-                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
-                DataTable Table = DB.GetTable("Territorial", OrderByStatment.ToString(),new object[] { "*"});
+                StringBuilder Columns = new StringBuilder();
+                Columns.AppendFormat("{0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+
+                OrderByStatment.AppendFormat(@"ORDER BY {0}", Columns.ToString());
+                DataTable Table = DB.GetTable("Territorial", OrderByStatment.ToString(), new object[] { IntegrantsColumns.Id + "," + Columns.ToString() });
+
+                foreach (DataRow Row in Table.Rows)
+                    Result.Add(new MTerritorial(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
+                                                , Row[IntegrantsColumns.Paterno].ToString()
+                                                , Row[IntegrantsColumns.Materno].ToString()
+                                                , Row[IntegrantsColumns.Nombres].ToString()
+                                                ));
+
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+
+            return Result;
+        }
+
+        public List<MTerritorial> GetTerrotorialesTable()
+        {
+            List<MTerritorial> Result = new List<MTerritorial>();
+
+            try
+            {
+                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0} DESC LIMIT {1}", IntegrantsColumns.Id, ConfigurationManager.AppSettings["MaxElementsPerPage"]);
+                DataTable Table = DB.GetTable("Territorial", OrderByStatment.ToString(), new object[] { "*" });
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MTerritorial(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -99,8 +159,38 @@ namespace Networks.Controllers
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 StringBuilder OrderByStatment = new StringBuilder();
-                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
-                DataTable Table = DB.GetTable("Lider", OrderByStatment.ToString(),new object[] { "*" });
+                StringBuilder Columns = new StringBuilder();
+                Columns.AppendFormat("{0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
+
+                OrderByStatment.AppendFormat(@"ORDER BY {0}", Columns.ToString());
+                DataTable Table = DB.GetTable("Lider", OrderByStatment.ToString(), new object[] { IntegrantsColumns.Id + "," + Columns.ToString() });
+
+                foreach (DataRow Row in Table.Rows)
+                    Result.Add(new MLider(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
+                                        , Row[IntegrantsColumns.Paterno].ToString()
+                                        , Row[IntegrantsColumns.Materno].ToString()
+                                        , Row[IntegrantsColumns.Nombres].ToString()                                        
+                                        ));
+
+            }
+            catch (Exception E)
+            {
+                throw E;
+            }
+
+            return Result;
+        }
+
+        public List<MLider> GetLideresTable()
+        {
+            List<MLider> Result = new List<MLider>();
+
+            try
+            {
+                DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
+                StringBuilder OrderByStatment = new StringBuilder();
+                OrderByStatment.AppendFormat(@"ORDER BY {0} DESC LIMIT {1}", IntegrantsColumns.Id, ConfigurationManager.AppSettings["MaxElementsPerPage"]);
+                DataTable Table = DB.GetTable("Lider", OrderByStatment.ToString(), new object[] { "*" });
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MLider(Int32.Parse(Row[IntegrantsColumns.Id].ToString())
@@ -127,7 +217,7 @@ namespace Networks.Controllers
             return Result;
         }
 
-        public List<MPromovido> GetPromovidos()
+        public List<MPromovido> GetPromovidosTable()
         {
             List<MPromovido> Result = new List<MPromovido>();
 
@@ -135,8 +225,8 @@ namespace Networks.Controllers
             {
                 DBManager DB = new DBManager(ConfigurationManager.AppSettings["SQLiteDB"]);
                 StringBuilder OrderByStatment = new StringBuilder();
-                OrderByStatment.AppendFormat(@"ORDER BY {0}, {1}, {2}", IntegrantsColumns.Paterno, IntegrantsColumns.Materno, IntegrantsColumns.Nombres);
-                DataTable Table = DB.GetTable("Promovido", OrderByStatment.ToString(),new object[] {"*"});
+                OrderByStatment.AppendFormat(@"ORDER BY {0} DESC LIMIT {1}", IntegrantsColumns.Id, ConfigurationManager.AppSettings["MaxElementsPerPage"]);
+                DataTable Table = DB.GetTable("Promovido", OrderByStatment.ToString(), new object[] { "*" });
 
                 foreach (DataRow Row in Table.Rows)
                     Result.Add(new MPromovido(Int32.Parse(Row[IntegrantsColumns.Id].ToString())

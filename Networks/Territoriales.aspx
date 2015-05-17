@@ -7,15 +7,6 @@
            <td colspan="4" class="title space">Agregar Territorial</td>
        </tr>
        <tr>
-           <td class="space">Sección:</td>
-           <td>
-               <asp:DropDownList runat="server" ID="DpSeccion" AutoPostBack="true" OnSelectedIndexChanged="DpSeccion_SelectedIndexChanged"></asp:DropDownList>
-           </td>
-           <td>
-               <asp:Label runat="server" ID="LblDistrict" Text="sample"></asp:Label>
-           </td>
-       </tr>
-       <tr>
            <td class="space">Coordinador:</td>
            <td>
                <asp:DropDownList runat="server" ID="DpCoor"></asp:DropDownList>
@@ -52,6 +43,15 @@
            <td><asp:TextBox runat="server" ID="TxtPhoneNextel" CssClass="columndata"></asp:TextBox></td>
            <td class="space columnlabel right">Clave de elector:</td>
            <td><asp:TextBox runat="server" ID="TxtElector" CssClass="columndata"></asp:TextBox></td>
+       </tr>
+       <tr>
+           <td class="space">Sección:</td>
+           <td>
+               <asp:DropDownList runat="server" ID="DpSeccion" AutoPostBack="true" OnSelectedIndexChanged="DpSeccion_SelectedIndexChanged"></asp:DropDownList>
+           </td>
+           <td>
+               <asp:Label runat="server" ID="LblDistrict" Text="sample"></asp:Label>
+           </td>
        </tr>
        <tr>
            <td colspan="2" style="text-align:center;" class="space"><asp:Button class="green" runat="server" ID="BtnSearch" Text="Buscar" OnClick="BtnSearch_Click" /></td>       

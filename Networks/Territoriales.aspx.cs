@@ -34,7 +34,7 @@ namespace Networks
 
         private void ReloadIntegrantsTable()
         {
-            ReloadIntegrantsTable(C.GetTerrotoriales());
+            ReloadIntegrantsTable(C.GetTerrotorialesTable());
         }
 
         private void ReloadIntegrantsTable(List<MTerritorial> filtered)

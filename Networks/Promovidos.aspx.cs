@@ -34,7 +34,7 @@ namespace Networks
 
         private void ReloadIntegrantsTable()
         {
-            ReloadIntegrantsTable(C.GetPromovidos());
+            ReloadIntegrantsTable(C.GetPromovidosTable());
         }
 
         private void ReloadIntegrantsTable(List<MPromovido> filtered)

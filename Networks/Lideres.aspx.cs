@@ -34,7 +34,7 @@ namespace Networks
 
         private void ReloadIntegrantsTable()
         {
-            ReloadIntegrantsTable(C.GetLideres());
+            ReloadIntegrantsTable(C.GetLideresTable());
         }
 
         private void ReloadIntegrantsTable(List<MLider> filtered)

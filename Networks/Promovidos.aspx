@@ -7,15 +7,6 @@
            <td colspan="4" class="title space">Agregar Promovido</td>
        </tr>
        <tr>
-           <td class="space">Sección:</td>
-           <td>
-               <asp:DropDownList runat="server" ID="DpSeccion" AutoPostBack="true" OnSelectedIndexChanged="DpSeccion_SelectedIndexChanged"></asp:DropDownList>
-           </td>
-           <td>
-               <asp:Label runat="server" ID="LblDistrict" Text="sample"></asp:Label>
-           </td>
-       </tr>
-       <tr>
            <td class="space">Líder:</td>
            <td>
                <asp:DropDownList runat="server" ID="DpLid"></asp:DropDownList>
@@ -60,6 +51,15 @@
                         <asp:ListItem>Vencidad</asp:ListItem>
                         <asp:ListItem>Otro</asp:ListItem>
                </asp:DropDownList>
+           </td>
+       </tr>
+       <tr>
+           <td class="space">Sección:</td>
+           <td>
+               <asp:DropDownList runat="server" ID="DpSeccion" AutoPostBack="true" OnSelectedIndexChanged="DpSeccion_SelectedIndexChanged"></asp:DropDownList>
+           </td>
+           <td>
+               <asp:Label runat="server" ID="LblDistrict" Text="sample"></asp:Label>
            </td>
        </tr>
        <tr>

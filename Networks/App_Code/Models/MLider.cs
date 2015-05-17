@@ -22,5 +22,8 @@ namespace Networks.Models
         {
             this._terrid = terrid;
         }
+
+        public MLider(int id, string lastname, string middlename, string names)
+            : base(id, lastname, middlename, names, -1, null, null, null, null, null, null, null) { }
     }
 }

@@ -32,7 +32,7 @@ namespace Networks
 
         private void ReloadIntegrants()
         {
-            DgridCoor.DataSource = C.GetCoordindores();
+            DgridCoor.DataSource = C.GetCoordindoresTable();
             this.DataBind();
         }
 
